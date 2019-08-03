@@ -43,16 +43,30 @@ function _update()
 -- level 0 hack
   if l==0 and x==120 and y==64
   then
+    d=1
     l=1
     x=8
+    y=64
   end
   -- level 1 hack
   if l==1 and x==120 and y==64
-  and d==1
+    and d==1
   then
+    d=0
     l=2
     x=8
+    y=64
   end
+  -- level 2 hack
+  if l==2 and x==120 and y==56
+  and d==1
+  then
+    l=3
+    x=8
+    y=64
+  end
+
+
 --    if l>15 then l=0 end
 end
 
@@ -62,7 +76,7 @@ function _draw()
 -- colour scheme
   map((l%8)*16,(flr(l/8)*16),0,0)
   print("")
-  print("x: "..x.." y: "..y.." d: "..d)
+  print("")
   -- horiz message, if any
   print(hmsg)
 
@@ -77,8 +91,23 @@ function _draw()
 -- level 0 hack
   if l==0 then
     spr(17, 120,64)
-  else
-    spr(18, 120, 64)
+  elseif l==1 then
+    if y==64 then
+      if d==0 then
+        spr(19, 120, 64)
+      else
+        spr(18,120,64)
+      end
+    end  
+  elseif l==2 then
+    if y==56 then
+      if d==0 then
+        spr(19, 120, 56)
+      else
+        spr(18,120,56)
+      end
+    end  
+  --  spr(18, 120, 56) 
   end
 
   spr(4+d,x,y)
