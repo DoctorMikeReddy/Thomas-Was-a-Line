@@ -47,7 +47,7 @@ function _update()
     x=8
   end
   -- level 1 hack
-  if l==1 and x==120 and y==56
+  if l==1 and x==120 and y==64
   and d==1
   then
     l=2
@@ -78,7 +78,7 @@ function _draw()
   if l==0 then
     spr(17, 120,64)
   else
-    spr(18, 120, 56)
+    spr(18, 120, 64)
   end
 
   spr(4+d,x,y)
