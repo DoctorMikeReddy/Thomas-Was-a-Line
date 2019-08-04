@@ -43,11 +43,15 @@ function _update()
       x=x+2 
       button=1
     elseif button==0 then
-      x=flr(x/8)*8
-      button=7
+      if x==flr(x/8)*8 then
+        button=7
+      else x-=2
+      end
     elseif button==1 then
-      x=flr((x/8)+0.5)*8
-      button=7
+      if x==flr(x/8)*8 then
+        button=7
+      else x+=2
+      end
     end
   elseif d>0 then
     if btn(2) then 
@@ -56,12 +60,16 @@ function _update()
     elseif btn(3) then
       y=y+2 
       button=3
+    elseif button==2 then
+      if y==flr(y/8)*8 then
+        button=7
+      else y-=2
+      end
     elseif button==3 then
-      y=flr(y/8)*8
-      button=7
-    elseif button==4 then
-      y=flr((y/8)+0.5)*8
-      button=7
+      if y==flr(y/8)*8 then
+        button=7
+      else y+=2
+      end
     end
   end
   
@@ -88,7 +96,10 @@ function _update()
     end
   end  
 -- level 0 hack
-  if l==0 and x==120 and y==64
+  if l==0 and 
+    players[player+1][4]==120 
+    and 
+    players[player+1][5]==64
   then
     d=1
     l=1
@@ -97,8 +108,12 @@ function _update()
     players[player+1][5]=64
   end
   -- level 1 hack
-  if l==1 and x==120 and y==64
-    and d>0
+  if l==1 and 
+    players[player+1][4]==120 
+    and 
+    players[player+1][5]==64
+    and
+    players[player+1][3]>0
   then
     d=-1
     l=2
