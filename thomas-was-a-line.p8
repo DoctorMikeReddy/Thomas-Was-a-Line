@@ -24,8 +24,8 @@ end
 
 function initlevels()
 levels={{"  [press z (or 🅾️)]" },
-        {"  why oh 'y' 🅾️ why?"},
-        {"  [fin]"}
+        {"there must be more than this!"},
+        {"fin - for now. come back for more]"}
        }
 end
 
@@ -104,9 +104,9 @@ function _update()
     and 
     players[player+1][5]==64
   then
-    d=1
     l=1
     player=0
+    players[player+1][3]=1
     players[player+1][4]=8
     players[player+1][5]=64
   end
@@ -118,9 +118,9 @@ function _update()
     and
     players[player+1][3]>0
   then
-    d=-1
     l=2
     player=0
+    players[player+1][3]=-1
     players[player+1][4]=8
     players[player+1][5]=64
   end
@@ -143,8 +143,9 @@ function _draw()
 -- matches mike's original 
 -- colour scheme
   map((l%8)*16,(flr(l/8)*16),0,0)
-  print("")
-  print("but: "..button.." x: "..x.." y: "..y)
+  print("") 
+  print("") --comment out for debug messages below
+--  print("but: "..button.." x: "..x.." y: "..y)
   -- horiz message, if any
   print(hmsg)
 
