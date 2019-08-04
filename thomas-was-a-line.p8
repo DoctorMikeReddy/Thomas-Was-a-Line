@@ -18,19 +18,22 @@ players={{0,5,-1,8,64},
 targets={{0,21,-1,120,64}
         }
 maxplayers=1 -- starting at zero
+
+initlevels()
+end
+
+function initlevels()
+levels={{"  [press z (or 🅾️)]" },
+        {"  why oh 'y' 🅾️ why?"},
+        {"  [fin]"}
+       }
 end
 
 function _update()
   if (l==0) then
     hmsg="  [arrow keys to move ⬅️ or ➡️]"
-  elseif (l==1) then
-    hmsg="  [press z (or 🅾️)]"
-  elseif (l==2) then
-    hmsg="  why oh 'y' 🅾️ why?"
-  elseif (l==3) then
-    hmsg="  sure as x is x?"
   else
-    hmsg="  [fin]"
+    hmsg=levels[l][1]
   end
   x=players[player+1][4]
   y=players[player+1][5]
@@ -161,27 +164,26 @@ function _draw()
        targets[player+1][5])
 --    spr(17, 120,64)
   elseif l==1 then
-    if y==64 then
-      if d<0 then
-        spr((targets[player+1][2])+
-         targets[player+1][3],
-       targets[player+1][4],
-       targets[player+1][5])
---        spr(19, 120, 64)
-      else
-        spr((targets[player+1][2])+
-         targets[player+1][3],
+    if d<0 then
+      spr((
+        targets[player+1][2]),
+ --        targets[player+1][3],
        targets[player+1][4],
        targets[player+1][5])
 --        spr(18,120,64)
-      end
-    end  
+    else
+      spr((
+        targets[player+1][2])+d,
+ --        targets[player+1][3],
+       targets[player+1][4],
+       targets[player+1][5])
+    end 
   elseif l==2 then
     if y==56 then
       if d<0 then
-        spr(19, 120, 56)
+        spr(22, 120, 56)
       else
-        spr(18,120,56)
+        spr(21,120,56)
       end
     end  
   --  spr(18, 120, 56) 
