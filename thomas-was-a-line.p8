@@ -7,34 +7,27 @@ y = 64
 l = 0
 d=-1 -- default x direction
 button=7 -- null as always false
-hmsg="null"
 vmsg="thomas was a line"
 player=0	
 -- test table of player chars
 players={{0,5,-1,8,64},
          {1,8,1,64,64},
-         {2,11,0,64,8} 
+         {2,11,0,64,8},
+         {3,14,0,120,64} 
         }		
 targets={{0,21,-1,120,64}
         }
 maxplayers=1 -- starting at zero
 
-initlevels()
-end
-
-function initlevels()
-levels={{"  [press z (or 🅾️)]" },
+levels={{"  [arrow keys to move ⬅️ or ➡️]"},
+        {"  [press z (or 🅾️)]" },
         {"there must be more than this!"},
         {"fin - for now. come back for more]"}
        }
+hmsg=levels[l+1][1]
 end
 
 function _update()
-  if (l==0) then
-    hmsg="  [arrow keys to move ⬅️ or ➡️]"
-  else
-    hmsg=levels[l][1]
-  end
   x=players[player+1][4]
   y=players[player+1][5]
   d=players[player+1][3]
@@ -96,8 +89,10 @@ function _update()
     if player>#players-1 
       or player>maxplayers-1 then
       player = 0
+      hmsg="not yet for others"
     end
-  end  
+   end  
+
 -- level 0 hack
   if l==0 and 
     players[player+1][4]==120 
@@ -105,6 +100,7 @@ function _update()
     players[player+1][5]==64
   then
     l=1
+    hmsg=levels[l+1][1]
     player=0
     players[player+1][3]=1
     players[player+1][4]=8
@@ -119,7 +115,9 @@ function _update()
     players[player+1][3]>0
   then
     l=2
+    hmsg=levels[l+1][1]
     player=0
+    maxplayers=4
     players[player+1][3]=-1
     players[player+1][4]=8
     players[player+1][5]=64
@@ -129,6 +127,7 @@ function _update()
   and d>0
   then
     l=3
+    hmsg=levels[l+1][1]
     player=0
     players[player+1][4]=8
     players[player+1][5]=64
@@ -159,18 +158,18 @@ function _draw()
 
 -- level 0 hack
   if l==0 then
-    spr((targets[player+1][2])+
-         targets[player+1][3],
-       targets[player+1][4],
-       targets[player+1][5])
+    spr((targets[1][2])+
+         targets[1][3],
+       targets[1][4],
+       targets[1][5])
 --    spr(17, 120,64)
   elseif l==1 then
     if d<0 then
       spr((
-        targets[player+1][2]),
+        targets[1][2]),
  --        targets[player+1][3],
-       targets[player+1][4],
-       targets[player+1][5])
+       targets[1][4],
+       targets[1][5])
 --        spr(18,120,64)
     else
       spr((
